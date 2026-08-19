@@ -1,1 +1,1 @@
-# Titled-Tuesday-Chess-Analytics
+# Titled Tuesday Chess Analytics
