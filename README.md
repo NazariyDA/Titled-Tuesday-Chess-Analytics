@@ -40,11 +40,94 @@ The project was implemented using the classic architecture for corporate analyti
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Calculation of the win rate percentage (win_rate_percentage), as well as the dynamic calculation of the player's accuracy delta relative to the global average (accuracy_delta_from_global) using a CROSS JOIN.
 
+<details>
+  <summary>📄 SQL Query </summary>
+  
+  ```sql
+-- Side_Color_Analysis
+WITH color_stats AS (
+    SELECT 
+        CASE 
+            WHEN rating BETWEEN 101 AND 2200 THEN '1. Candidate Master /CM / I Grade (до 2200)'
+            WHEN rating BETWEEN 2201 AND 2500 THEN '2. FIDE Master / FM / IM (2201-2500)'
+            WHEN rating BETWEEN 2501 AND 2700 THEN '3. Grandmaster Elite (2501-2700)'
+            ELSE '4. Super Grandmasters / Top world (2700+)'
+        END AS rating_tier,
+        username,
+        CASE WHEN white = 'True' THEN 'White' ELSE 'Black' END AS color_side,
+        COUNT(*) AS total_games,
+        AVG(accuracy) AS avg_accuracy,
+        SUM(score) * 100.0 / COUNT(*) AS win_rate_percentage
+    FROM titled_tuesday
+    WHERE rating > 100 AND accuracy > 1.0 AND username IS NOT NULL AND score IS NOT NULL
+    GROUP BY 1, 2, white
+),
+global_stats AS (
+    SELECT AVG(accuracy) AS global_avg_accuracy FROM titled_tuesday WHERE rating > 100 AND accuracy > 1.0 AND username IS NOT NULL
+)
+SELECT 
+    c.rating_tier,
+    c.username,
+    c.color_side,
+    c.total_games,
+    ROUND(c.avg_accuracy, 2) AS avg_accuracy,
+    ROUND(c.avg_accuracy - g.global_avg_accuracy, 2) AS accuracy_delta_from_global,
+    ROUND(c.win_rate_percentage, 2) AS win_rate_percentage,
+    ROUND(c.total_games * 100.0 / SUM(c.total_games) OVER(PARTITION BY c.rating_tier, c.username), 2) AS games_share_pct
+FROM color_stats c
+CROSS JOIN global_stats g;
+```
+
+</details>
+
+
+
+
 * **Round_Dynamics (Tournament dynamics by round):**
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Use of the LAG() window shift function and the SUM(...) OVER(ORDER BY...) cumulative sum function.
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Tracking accuracy progress compared to the previous round (accuracy_growth_from_prev_round) and a cumulative count of games played throughout the tournament (cumulative_games_played).
+
+<details>
+  <summary>📄 SQL Query </summary>
+  
+  ```sql
+-- Round_Dynamics
+SELECT 
+    rating_tier,
+    username,
+    round,
+    games_in_round,
+    avg_accuracy_in_round,
+    ROUND(avg_accuracy_in_round - LAG(avg_accuracy_in_round, 1) OVER (PARTITION BY rating_tier, username ORDER BY round), 2) AS accuracy_growth_from_prev_round,
+    avg_score_in_round,
+    SUM(games_in_round) OVER (PARTITION BY rating_tier, username ORDER BY round ASC) AS cumulative_games_played
+FROM (
+    SELECT 
+        CASE 
+            WHEN rating BETWEEN 101 AND 2200 THEN '1. Candidate Master /CM / I Grade (до 2200)'
+            WHEN rating BETWEEN 2201 AND 2500 THEN '2. FIDE Master / FM / IM (2201-2500)'
+            WHEN rating BETWEEN 2501 AND 2700 THEN '3. Grandmaster Elite (2501-2700)'
+            ELSE '4. Super Grandmasters / Top world (2700+)'
+        END AS rating_tier,
+        username,
+        round,
+        COUNT(*) AS games_in_round,
+        ROUND(AVG(accuracy), 2) AS avg_accuracy_in_round,
+        ROUND(AVG(score), 3) AS avg_score_in_round
+    FROM titled_tuesday
+    WHERE rating > 100 AND accuracy > 1.0 AND username IS NOT NULL AND round IS NOT NULL
+    GROUP BY 1, 2, round
+) sub
+ORDER BY rating_tier, username, round ASC;
+```
+
+</details>
+
+
+
+
 
 * **Top_10_Elite (Ranking of the best players):**
 
@@ -52,12 +135,83 @@ The project was implemented using the classic architecture for corporate analyti
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Mathematical calculation of the root mean square deviation (standard deviation \(\sigma \)) using the formula SQRT(AVG(x²) - AVG(x)²) to assess the stability and consistency of a chess player's move accuracy (accuracy_consistency_sigma).
 
+<details>
+  <summary>📄 SQL Query </summary>
+  
+  ```sql
+-- Top_10_Elite
+WITH ranked_players AS (
+    SELECT 
+        CASE 
+            WHEN rating BETWEEN 101 AND 2200 THEN '1. Candidate Master /CM / I Grade (до 2200)'
+            WHEN rating BETWEEN 2201 AND 2500 THEN '2. FIDE Master / FM / IM (2201-2500)'
+            WHEN rating BETWEEN 2501 AND 2700 THEN '3. Grandmaster Elite (2501-2700)'
+            ELSE '4. Super Grandmasters / Top world (2700+)'
+        END AS rating_tier,
+        username,
+        COUNT(*) AS total_games_played,
+        ROUND(AVG(rating), 0) AS avg_player_rating,
+        ROUND(AVG(accuracy), 2) AS elite_avg_accuracy,
+        ROUND(SQRT(AVG(accuracy * accuracy) - (AVG(accuracy) * AVG(accuracy))), 2) AS accuracy_consistency_sigma,
+        SUM(score) AS total_points_scored,
+        DENSE_RANK() OVER (PARTITION BY 
+            CASE 
+                WHEN rating BETWEEN 101 AND 2200 THEN '1. Candidate Master /CM / I Grade (до 2200)'
+                WHEN rating BETWEEN 2201 AND 2500 THEN '2. FIDE Master / FM / IM (2201-2500)'
+                WHEN rating BETWEEN 2501 AND 2700 THEN '3. Grandmaster Elite (2501-2700)'
+                ELSE '4. Super Grandmasters / Top world (2700+)'
+            END 
+            ORDER BY AVG(accuracy) DESC) AS internal_rank
+    FROM titled_tuesday
+    WHERE rating > 100 AND accuracy > 1.0 AND username IS NOT NULL
+    GROUP BY 1, 2
+    HAVING COUNT(*) >= 100
+)
+SELECT * 
+FROM ranked_players
+WHERE internal_rank <= 10
+ORDER BY rating_tier, internal_rank ASC;
+```
+
+</details>
+
+
+
+
+
+
+
 * **Rating_Segmentation (Qualification-based segmentation):**
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Complex conditional aggregation using SUM(CASE WHEN...) and grouping.
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Determination of the number and share of "brilliant games" (brilliant_games_count / brilliant_games_share_pct), where player accuracy reached or exceeded the 95.0% threshold.
 
+<details>
+  <summary>📄 SQL Query </summary>
+  
+  ```sql
+-- Rating_Segmentation
+SELECT 
+    CASE 
+        WHEN rating BETWEEN 101 AND 2200 THEN '1. Candidate Master /CM / I Grade (до 2200)'
+        WHEN rating BETWEEN 2201 AND 2500 THEN '2. FIDE Master / FM / IM (2201-2500)'
+        WHEN rating BETWEEN 2501 AND 2700 THEN '3. Grandmaster Elite (2501-2700)'
+        ELSE '4. Super Grandmasters / Top world (2700+)'
+    END AS rating_tier,
+    username,
+    COUNT(*) AS total_games_played,
+    ROUND(AVG(accuracy), 2) AS avg_accuracy_in_tier,
+    ROUND(AVG(score), 3) AS avg_score_in_tier,
+    SUM(CASE WHEN accuracy >= 95.0 THEN 1 ELSE 0 END) AS brilliant_games_count,
+    ROUND(SUM(CASE WHEN accuracy >= 95.0 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS brilliant_games_share_pct
+FROM titled_tuesday
+WHERE rating > 100 AND accuracy > 1.0 AND username IS NOT NULL
+GROUP BY 1, 2
+ORDER BY 1, 3 DESC;
+```
+
+</details>
 
 
 
