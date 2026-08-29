@@ -213,6 +213,15 @@ ORDER BY 1, 3 DESC;
 
 </details>
 
+* ### Power BI: Modeling and UI (Presentation Layer)
+By moving calculations to the database, the Power BI model became extremely lightweight and high-performing:
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Data schema:** Clear relational links were established between four imported tables using the `rating_tier` and `username` keys.
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **DAX Optimization:** A separate, isolated helper table was generated using DAX to improve the visual, sorting, and customization of the user-facing filter (Slicer).
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **UI/UX:** Interactive cross-filtering has been implemented—selecting a rating tier or a specific chess player instantly updates the accuracy, round, and color preference charts.
+
 
 
 
