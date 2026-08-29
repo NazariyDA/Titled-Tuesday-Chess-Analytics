@@ -33,7 +33,8 @@ Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that 
 The project was implemented using the classic architecture for corporate analytics solutions (DWH/BI). All logic, aggregations, and complex statistical metrics are calculated at the **SQL** level, ensuring maximum performance and a lightweight final model in **Power BI**.
 
 * ### SQL Stage: Transformation and Metric Calculation (ELT Layer)
-  The raw flat dataset **`titled_tuesday`** was normalized and split into four clean analytical tables using optimized SQL queries:
+  The raw flat dataset **`titled_tuesday`**  **`[titled_tuesday](./titled_tuesday.csv)`** was normalized and split into four clean analytical tables using optimized SQL queries:
+
 * **Side_Color_Analysis (Color Effectiveness Analysis):**
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Use of CTEs (Common Table Expressions) and the analytic window function SUM(...) OVER(PARTITION BY...).
