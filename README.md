@@ -28,6 +28,10 @@ Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that 
 
 * **Rating Tier:** Classification of players into rating categories, ranging from Candidate Masters (up to 2200) to Super Grandmasters (2700+).
 
+
+<img width="818" height="456" alt="tykjytjrjjutrjty" src="https://github.com/user-attachments/assets/d8ca26a6-3f54-4ed0-a5fa-a5c5d0ba12b1" />
+
+
 ## 🛠️ Tech Stack & Architecture
 
 The project was implemented using the classic architecture for corporate analytics solutions (DWH/BI). All logic, aggregations, and complex statistical metrics are calculated at the **SQL** level, ensuring maximum performance and a lightweight final model in **Power BI**.
