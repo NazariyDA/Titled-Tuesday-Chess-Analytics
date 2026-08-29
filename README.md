@@ -1,9 +1,8 @@
 # <img width="25" height="35" alt="Titled_Tuesday_allmode" src="https://github.com/user-attachments/assets/9862a504-61b3-4a75-b4da-75e02d3ef6e5" /> Titled Tuesday Chess Analytics
 Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that transforms thousands of chess games into insightful stories about players, performance, strategies, and the dynamics of elite online chess on <img width="100" height="30" alt="Chess-com-Logo-Transparent" src="https://github.com/user-attachments/assets/36145a87-5a61-4f7c-be51-8499b2bb8724" />
 
-🧩 
 
-## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/190d7aa4-6ac1-4060-bf2b-7c58be120a0c" /> Objectives of this project
+## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/556883bb-703a-426c-9d0b-7e06cd0a8351" /> Objectives of this project
 
 **Examining Performance Patterns:** An Analysis of the Relationship Between Game Accuracy and Player Performance Across Skill Levels in Chess.com Titled Tuesday Tournaments.
 
@@ -11,7 +10,7 @@ Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that 
 
 **A data-centric approach to chess:** identifying the most effective players, analyzing the impact of piece color on win rates, and detecting anomalies (paradoxes) over the course of long tournaments.
 
-## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/2e00bec0-d629-4368-9657-90e933350f74" /> Data overview
+## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/4667705e-82a1-47db-bd9c-b70c1247afe4" /> Data overview
 
 **Data volume:** The dashboard covers a vast dataset of over **34,000 matches** played (from September 26, 2023 to December 3, 2024).
 
@@ -30,14 +29,14 @@ Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that 
 <img width="818" height="456" alt="tykjytjrjjutrjty" src="https://github.com/user-attachments/assets/d8ca26a6-3f54-4ed0-a5fa-a5c5d0ba12b1" />
 
 
-## 🛠️ Tech Stack & Architecture
+## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/a8b199ac-b5e2-4f50-a169-d89d6b2c181b" /> Tech Stack & Architecture
 
 The project was implemented using the classic architecture for corporate analytics solutions (DWH/BI). All logic, aggregations, and complex statistical metrics are calculated at the **SQL** level, ensuring maximum performance and a lightweight final model in **Power BI**.
 
 * ### SQL Stage: Transformation and Metric Calculation (ELT Layer)
   The raw flat dataset [titled_tuesday](./titled_tuesday.csv) was normalized and split into **4 clean analytical tables** using optimized SQL queries:
 
-* **Side_Color_Analysis (Color Effectiveness Analysis):**
+* **<ins>Side_Color_Analysis (Color Effectiveness Analysis):</ins>**
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Use of CTEs (Common Table Expressions) and the analytic window function `SUM(...) OVER(PARTITION BY...)`.
 
@@ -86,7 +85,7 @@ CROSS JOIN global_stats g;
 
 
 
-* **Round_Dynamics (Tournament dynamics by round):**
+* **<ins>Round_Dynamics (Tournament dynamics by round):</ins>**
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Use of the `LAG()` window shift function and the `SUM(...) OVER(ORDER BY...)` cumulative sum function.
 
@@ -132,7 +131,7 @@ ORDER BY rating_tier, username, round ASC;
 
 
 
-* **Top_10_Elite (Ranking of the best players):**
+* **<ins>Top_10_Elite (Ranking of the best players):</ins>**
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Filtering the dataset using `HAVING COUNT(*) >= 100` (to ensure statistical validity) and applying `DENSE_RANK()` for ranking.
 
@@ -184,7 +183,7 @@ ORDER BY rating_tier, internal_rank ASC;
 
 
 
-* **Rating_Segmentation (Qualification-based segmentation):**
+* **<ins>Rating_Segmentation (Qualification-based segmentation):</ins>**
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Complex conditional aggregation using `SUM(CASE WHEN...)` and grouping.
 
@@ -228,7 +227,7 @@ By moving calculations to the database, the Power BI model became extremely ligh
 
 
 
-## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/6793dbc4-3d2d-4088-bf15-df94174bfd8f" /> **Insights & Analysis**
+## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/67dad89f-7be3-415c-b199-7bcaf3bc427c" />  **Insights & Analysis**
 
 * ### Top 10 Players by Accuracy and Consistency
 
