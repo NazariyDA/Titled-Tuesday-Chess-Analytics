@@ -33,9 +33,30 @@ Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that 
 The project was implemented using the classic architecture for corporate analytics solutions (DWH/BI). All logic, aggregations, and complex statistical metrics are calculated at the **SQL** level, ensuring maximum performance and a lightweight final model in **Power BI**.
 
 * ### SQL Stage: Transformation and Metric Calculation (ELT Layer)
+  The raw flat dataset **`titled_tuesday`** was normalized and split into four clean analytical tables using optimized SQL queries:
+* **Side_Color_Analysis (Color Effectiveness Analysis):**
 
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Use of CTEs (Common Table Expressions) and the analytic window function SUM(...) OVER(PARTITION BY...).
 
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Calculation of the win rate percentage (win_rate_percentage), as well as the dynamic calculation of the player's accuracy delta relative to the global average (accuracy_delta_from_global) using a CROSS JOIN.
 
+* **Round_Dynamics (Tournament dynamics by round):**
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Use of the LAG() window shift function and the SUM(...) OVER(ORDER BY...) cumulative sum function.
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Tracking accuracy progress compared to the previous round (accuracy_growth_from_prev_round) and a cumulative count of games played throughout the tournament (cumulative_games_played).
+
+* **Top_10_Elite (Ranking of the best players):**
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Filtering the dataset using `HAVING COUNT(*) >= 100` (to ensure statistical validity) and applying `DENSE_RANK()` for ranking.
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Mathematical calculation of the root mean square deviation (standard deviation \(\sigma \)) using the formula SQRT(AVG(x²) - AVG(x)²) to assess the stability and consistency of a chess player's move accuracy (accuracy_consistency_sigma).
+
+* **Rating_Segmentation (Qualification-based segmentation):**
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> Complex conditional aggregation using SUM(CASE WHEN...) and grouping.
+
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Determination of the number and share of "brilliant games" (brilliant_games_count / brilliant_games_share_pct), where player accuracy reached or exceeded the 95.0% threshold.
 
 
 
