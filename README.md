@@ -33,7 +33,7 @@ Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that 
 
 The project was implemented using the classic architecture for corporate analytics solutions (DWH/BI). All logic, aggregations, and complex statistical metrics are calculated at the **SQL** level, ensuring maximum performance and a lightweight final model in **Power BI**.
 
-* ### SQL Stage: Transformation and Metric Calculation (ELT Layer)
+### <img width="20" height="20" alt="image" src="https://github.com/user-attachments/assets/e5bfbf8b-84e2-4433-9ab3-0ee11b536d72" />   SQL Stage: Transformation and Metric Calculation (ELT Layer)
   The raw flat dataset [titled_tuesday](./titled_tuesday.csv) was normalized and split into **4 clean analytical tables** using optimized SQL queries:
 
 * **<ins>Side_Color_Analysis (Color Effectiveness Analysis):</ins>**
@@ -215,7 +215,7 @@ ORDER BY 1, 3 DESC;
 
 </details>
 
-* ### Power BI: Modeling and UI (Presentation Layer)
+### <img width="20" height="20" alt="image" src="https://github.com/user-attachments/assets/c5a2c748-fa81-4ada-8e9c-0d8a491786aa" /> Power BI: Modeling and UI (Presentation Layer)
 By moving calculations to the database, the Power BI model became extremely lightweight and high-performing:
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Data schema:** Clear relational links were established between four imported tables using the `rating_tier` and `username` keys.
@@ -233,7 +233,7 @@ By moving calculations to the database, the Power BI model became extremely ligh
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **The clear leaders:** Players **magnuscarlsen** (90.38) and **dropstonedp** (90.33) are demonstrating the highest average accuracy in the tournament.
 
-<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/55601706-b5a9-4da3-9c7a-8926a6ee60b2" /> **Elite-level density:** All top-10 players have an average accuracy ranging from **89.39% to 0.38%**. This highlights the incredibly slim margin for error at the highest level—a split second or a micro-mistake determines the winner.
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Elite-level density:** All top-10 players have an average accuracy ranging from **89.39% to 0.38%**. This highlights the incredibly slim margin for error at the highest level—a split second or a micro-mistake determines the winner.
 
 * ### The Accuracy–Performance Paradox by Round
 
@@ -241,13 +241,13 @@ By moving calculations to the database, the Power BI model became extremely ligh
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **The essence of the paradox is this:** as the tournament progresses (rounds 8–11), average accuracy drops to **0.73–0.75**, whereas the Average Score rises sharply.
 
-<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Chess context:** At the start of a tournament, elite players face weaker opponents, playing according to rigorous positional chess theory (characterized by high computer-like precision). In the final rounds, the leaders face one another: positions become extremely sharp, chaotic, and tactical. Players consciously take risks—situations where computer-calculated "precision" drops, but practical effectiveness and tension rise.
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/625134af-f111-421e-a8ea-a4c0f2581fe2" /> **Chess context:** At the start of a tournament, elite players face weaker opponents, playing according to rigorous positional chess theory (characterized by high computer-like precision). In the final rounds, the leaders face one another: positions become extremely sharp, chaotic, and tactical. Players consciously take risks—situations where computer-calculated "precision" drops, but practical effectiveness and tension rise.
 
 * ### Distribution of games by piece color
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Tournament balance:** The number of games played with the white pieces is **17,497 (50.97%)**, and with the black pieces — **16,830 (49.03%)**.
 
-<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Analysis:** The tournament organizers ensure near-perfect mathematical parity in the distribution of colors, which eliminates the factor of the random first-move advantage (for White) over the long run for an individual player.
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/625134af-f111-421e-a8ea-a4c0f2581fe2" /> **Analysis:** The tournament organizers ensure near-perfect mathematical parity in the distribution of colors, which eliminates the factor of the random first-move advantage (for White) over the long run for an individual player.
 
 * ### Performance by Rating Tier
 
@@ -255,10 +255,11 @@ By moving calculations to the database, the Power BI model became extremely ligh
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Brilliant Games Anomaly:** The highest percentage of "brilliant games" **(Brilliant Games (%) = 24.24%)** was recorded in the FIDE Master / FM / IM category (2201–2500).
 
-<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Analysis:** Lower-rated players (2201–2500) are compelled to play extremely aggressive, unconventional, and sharp chess to pose challenges to opponents rated 2700+. This generates more moves that the Chess.com algorithm rates as "Brilliant." At the same time, super-grandmasters (2700+) maintain a high level of consistency (16.63% "Brilliant" moves across a vast number of games).
+<img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/625134af-f111-421e-a8ea-a4c0f2581fe2" /> **Analysis:** Lower-rated players (2201–2500) are compelled to play extremely aggressive, unconventional, and sharp chess to pose challenges to opponents rated 2700+. This generates more moves that the Chess.com algorithm rates as "Brilliant." At the same time, super-grandmasters (2700+) maintain a high level of consistency (16.63% "Brilliant" moves across a vast number of games).
 
 
-### Thank you for your interest in this project 🏆
+### Thank you for your interest in this project <img width="35" height="35" alt="image" src="https://github.com/user-attachments/assets/a8686c00-0cb6-431a-aeac-f0a4cbc82a09" />
+
 
 
 
