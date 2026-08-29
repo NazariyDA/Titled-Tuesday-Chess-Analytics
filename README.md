@@ -259,7 +259,7 @@ By moving calculations to the database, the Power BI model became extremely ligh
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Analysis:** Lower-rated players (2201–2500) are compelled to play extremely aggressive, unconventional, and sharp chess to pose challenges to opponents rated 2700+. This generates more moves that the Chess.com algorithm rates as "Brilliant." At the same time, super-grandmasters (2700+) maintain a high level of consistency (16.63% "Brilliant" moves across a vast number of games).
 
 
-
+### Thank you for your interest in this project 🏆
 
 
 
