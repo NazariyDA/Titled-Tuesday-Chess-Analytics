@@ -3,7 +3,7 @@ Dive into the fast-paced world of Titled Tuesday with a Power BI dashboard that 
 
 :pushpin: Data source
 
-🧩 Used technologies: Power BI with SQL (data cleaning and transformation)
+🧩 
 
 ## <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/190d7aa4-6ac1-4060-bf2b-7c58be120a0c" /> Objectives of this project
 
