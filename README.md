@@ -44,7 +44,7 @@ The project was implemented using the classic architecture for corporate analyti
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Calculation of the win rate percentage `(win_rate_percentage)`, as well as the dynamic calculation of the player's accuracy delta relative to the global average `(accuracy_delta_from_global)` using a `CROSS JOIN`.
 
 <details>
-  <summary>📄 SQL Query </summary>
+  <summary>📄 SQL Query (Click to expand)</summary>
   
   ```sql
 -- Side_Color_Analysis
@@ -93,7 +93,7 @@ CROSS JOIN global_stats g;
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Tracking accuracy progress compared to the previous round `(accuracy_growth_from_prev_round)` and a cumulative count of games played throughout the tournament `(cumulative_games_played)`.
 
 <details>
-  <summary>📄 SQL Query </summary>
+  <summary>📄 SQL Query (Click to expand)</summary>
   
   ```sql
 -- Round_Dynamics
@@ -139,7 +139,7 @@ ORDER BY rating_tier, username, round ASC;
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Mathematical calculation of the root mean square deviation (standard deviation \(\sigma \)) using the formula `SQRT(AVG(x²) - AVG(x)²)` to assess the stability and consistency of a chess player's move accuracy `(accuracy_consistency_sigma)`.
 
 <details>
-  <summary>📄 SQL Query </summary>
+  <summary>📄 SQL Query (Click to expand)</summary>
   
   ```sql
 -- Top_10_Elite
@@ -191,7 +191,7 @@ ORDER BY rating_tier, internal_rank ASC;
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/48c4ff08-2a9d-4d3c-9718-eee6f10e87a1" /> **Metrics:** Determination of the number and share of "brilliant games" (`brilliant_games_count` / `brilliant_games_share_pct`), where player accuracy reached or exceeded the 95.0% threshold.
 
 <details>
-  <summary>📄 SQL Query </summary>
+  <summary>📄 SQL Query (Click to expand)</summary>
   
   ```sql
 -- Rating_Segmentation
