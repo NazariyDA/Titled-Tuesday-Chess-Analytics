@@ -257,7 +257,7 @@ By moving calculations to the database, the Power BI model became extremely ligh
 
 <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/625134af-f111-421e-a8ea-a4c0f2581fe2" /> **Analysis:** Lower-rated players (2201–2500) are compelled to play extremely aggressive, unconventional, and sharp chess to pose challenges to opponents rated 2700+. This generates more moves that the Chess.com algorithm rates as "Brilliant." At the same time, super-grandmasters (2700+) maintain a high level of consistency (16.63% "Brilliant" moves across a vast number of games).
 
-## Business Value & Recommendations
+## <img width="25" height="25" alt="figure" src="https://github.com/user-attachments/assets/21cbcc41-0c6c-48e1-b97e-a1ab633196f4" /> **Business Value & Recommendations**
 Based on the developed dashboard, the following data-driven solutions have been formulated for practical application in media production, digital marketing, and gaming platform gamification:
 
 * ### Media Content & Live Streaming Monetization (Media & Streaming Value):
